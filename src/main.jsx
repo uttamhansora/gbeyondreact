@@ -5,7 +5,6 @@ import App from './App.jsx';
 import { initSmoothScroll } from './utils/smoothScroll';
 
 import './styles/wnChrome.css';
-import './styles/wnLegency.css';
 
 initSmoothScroll();
 
