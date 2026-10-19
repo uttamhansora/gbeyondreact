@@ -1,0 +1,13 @@
+{
+  "data": [
+    { "id": 1, "slug": "case-study", "title": "Case Study" }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 1,
+      "per_page": 50,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  }
+}

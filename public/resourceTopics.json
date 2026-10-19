@@ -1,0 +1,18 @@
+{
+  "data": [
+    { "id": 1, "slug": "case-studies", "title": "Case Studies" },
+    { "id": 2, "slug": "managed-detection-and-response", "title": "Managed Detection and Response" },
+    { "id": 3, "slug": "third-party-risk-management", "title": "Third-Party Risk Management" },
+    { "id": 4, "slug": "cloud-security", "title": "Cloud Security" },
+    { "id": 5, "slug": "financial-services", "title": "Financial Services" },
+    { "id": 6, "slug": "critical-infrastructure", "title": "Critical Infrastructure" }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 6,
+      "per_page": 50,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  }
+}

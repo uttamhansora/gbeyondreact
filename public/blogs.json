@@ -1,0 +1,36 @@
+{
+  "data": [
+    {
+      "id": 2026062901,
+      "title": "Strengthening Security for a Multi-Tenant SaaS App Builder Through Web & API Penetration Testing",
+      "url": "https://whitenet.io/strengthening-security-for-a-multi-tenant-saas-app-builder-through-web-api-penetration-testing/",
+      "topic": "Case Studies",
+      "image": "https://whitenet.io/wp-content/uploads/2026/06/Strengthening-Security-for-a-Multi-Tenant-SaaS-App-Builder-Through-Web-API-Penetration-Testing.png",
+      "imageAltText": "Multi-tenant SaaS app builder web and API penetration testing case study"
+    },
+    {
+      "id": 2026062902,
+      "title": "How a Web Application Pentest Uncovered Critical Vulnerabilities Before a Major Product Launch",
+      "url": "https://whitenet.io/how-a-web-application-pentest-uncovered-critical-vulnerabilities-before-a-major-product-launch/",
+      "topic": "Case Studies",
+      "image": "https://whitenet.io/wp-content/uploads/2026/06/ChatGPT-Image-Jun-29-2026-10_26_03-PM.png",
+      "imageAltText": "Web application penetration testing case study before a product launch"
+    },
+    {
+      "id": 2024102201,
+      "title": "How to Create a Business Plan That Drives",
+      "url": "https://whitenet.io/how-to-create-a-business-plan-that-drives/",
+      "topic": "Business Strategy",
+      "image": "https://whitenet.io/wp-content/uploads/2024/10/Post-5.jpg",
+      "imageAltText": "How to create a business plan that drives"
+    }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 3,
+      "per_page": 3,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  }
+}

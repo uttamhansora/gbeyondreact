@@ -1,0 +1,14 @@
+{
+  "data": [
+    { "id": 1, "slug": "case-studies", "title": "Case Studies" },
+    { "id": 2, "slug": "business-strategy", "title": "Business Strategy" }
+  ],
+  "meta": {
+    "pagination": {
+      "total": 2,
+      "per_page": 50,
+      "current_page": 1,
+      "total_pages": 1
+    }
+  }
+}
