@@ -179,63 +179,30 @@ function initWnChrome() {
   chrome.dataset.wnReady = 'true';
 
   const burger = chrome.querySelector('[data-wn-burger]');
-  const drawer = chrome.querySelector('[data-wn-drawer]');
-  const servicesToggle = chrome.querySelector('[data-wn-services-toggle]');
-  const servicesMenu = chrome.querySelector('[data-wn-services-menu]');
-  const servicesWrap = servicesToggle?.closest('.wnChrome__dropdown');
+  const panel = chrome.querySelector('[data-wn-menu-panel]');
+  const closeBtn = chrome.querySelector('[data-wn-menu-close]');
 
-  const setDrawer = (open) => {
-    if (!burger || !drawer) return;
+  const setPanel = (open) => {
+    if (!burger || !panel) return;
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    if (open) {
-      drawer.removeAttribute('hidden');
-    } else {
-      drawer.setAttribute('hidden', '');
-    }
-  };
-
-  const setServicesOpen = (open) => {
-    if (!servicesToggle || !servicesMenu) return;
-    servicesToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    servicesWrap?.classList.toggle('is-open', open);
-    chrome.classList.toggle('is-mega-open', open);
-    if (open) {
-      servicesMenu.removeAttribute('hidden');
-    } else {
-      servicesMenu.setAttribute('hidden', '');
-    }
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    chrome.classList.toggle('is-menu-open', open);
+    document.documentElement.classList.toggle('wn-menu-lock', open);
   };
 
   burger?.addEventListener('click', () => {
-    const open = burger.getAttribute('aria-expanded') !== 'true';
-    setDrawer(open);
-    if (open) setServicesOpen(false);
+    setPanel(burger.getAttribute('aria-expanded') !== 'true');
   });
 
-  servicesToggle?.addEventListener('click', (event) => {
-    event.preventDefault();
-    const open = servicesToggle.getAttribute('aria-expanded') !== 'true';
-    setServicesOpen(open);
-  });
+  closeBtn?.addEventListener('click', () => setPanel(false));
 
-  document.addEventListener('click', (event) => {
-    const target = event.target;
-    if (
-      servicesMenu &&
-      servicesToggle &&
-      !servicesMenu.contains(target) &&
-      !servicesToggle.contains(target)
-    ) {
-      setServicesOpen(false);
-    }
+  panel?.addEventListener('click', (event) => {
+    if (event.target.closest('a')) setPanel(false);
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape') {
-      setServicesOpen(false);
-      setDrawer(false);
-    }
+    if (event.key === 'Escape') setPanel(false);
   });
 
   const onScroll = () => {
