@@ -171,74 +171,50 @@ function initWnHeroBg() {
 }
 
 function initWnChrome() {
-  const nav = document.querySelector('[data-wn-nav]');
   const chrome = document.querySelector('[data-wn-chrome]');
-  if (!nav || !chrome || chrome.dataset.wnReady === 'true') {
+  if (!chrome || chrome.dataset.wnReady === 'true') {
     return;
   }
 
   chrome.dataset.wnReady = 'true';
 
-  const bar = nav.querySelector('.wnLgNav__bar');
-  const toggle = nav.querySelector('[data-wn-nav-toggle]');
-  const panel = nav.querySelector('.wnLgNav__bottom');
-  const bg = nav.querySelector('[data-wn-nav-close]');
-  const acc = nav.querySelector('[data-wn-services-acc]');
-  const accHead = nav.querySelector('[data-wn-acc-head]');
-  let lastFocus = null;
+  const burger = chrome.querySelector('[data-wn-burger]');
+  const panel = chrome.querySelector('[data-wn-menu-panel]');
+  const closeBtn = chrome.querySelector('[data-wn-menu-close]');
 
-  // Mobile: Services column collapses into a single accordion row.
-  accHead?.addEventListener('click', () => {
-    if (!nav || !window.matchMedia('(max-width: 1023px)').matches) return;
-    const open = nav.dataset.accOpen === 'true';
-    nav.dataset.accOpen = open ? 'false' : 'true';
-    acc?.setAttribute('aria-expanded', open ? 'false' : 'true');
-  });
-  acc?.setAttribute('aria-expanded', 'false');
-
-  const isOpen = () => bar?.dataset.navStatus === 'active';
-
-  const setNav = (open) => {
-    if (!bar || !toggle || !panel) return;
-    if (open && !isOpen()) lastFocus = document.activeElement;
-    bar.dataset.navStatus = open ? 'active' : 'not-active';
-    nav.dataset.navStatus = open ? 'active' : 'not-active';
-    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-    panel.inert = !open;
+  const setPanel = (open) => {
+    if (!burger || !panel) return;
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+    chrome.classList.toggle('is-menu-open', open);
     document.documentElement.classList.toggle('wn-menu-lock', open);
-    if (!open && lastFocus && nav.contains(lastFocus)) {
-      lastFocus.focus?.();
-      lastFocus = null;
-    }
   };
 
-  toggle?.addEventListener('click', () => setNav(!isOpen()));
+  burger?.addEventListener('click', () => {
+    setPanel(burger.getAttribute('aria-expanded') !== 'true');
+  });
 
-  bg?.addEventListener('click', () => setNav(false));
+  closeBtn?.addEventListener('click', () => setPanel(false));
 
-  // Close after selecting a navigation link (touch + mouse friendly).
   panel?.addEventListener('click', (event) => {
-    if (event.target.closest('a[href]')) setNav(false);
+    if (event.target.closest('a')) setPanel(false);
   });
 
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && isOpen()) {
-      event.preventDefault();
-      setNav(false);
-      toggle?.focus();
-    }
-  });
-
-  // Keep the menu usable when the viewport grows past the mobile breakpoint.
-  window.addEventListener('resize', () => {
-    if (window.innerWidth > 1024 && isOpen() && !nav.contains(document.activeElement)) {
-      setNav(false);
-    }
+    if (event.key === 'Escape') setPanel(false);
   });
 
   const onScroll = () => {
-    chrome.classList.toggle('is-scrolled', window.scrollY > 8);
+    const heroScroll = document.querySelector('[data-wn-hero-scroll]');
+    const hero = document.querySelector('.wnHero');
+    const chromeH = chrome.offsetHeight || 0;
+    const limit = heroScroll
+      ? Math.max(8, heroScroll.offsetHeight - window.innerHeight * 0.35)
+      : hero
+        ? Math.max(8, hero.offsetHeight - chromeH)
+        : 8;
+    chrome.classList.toggle('is-scrolled', window.scrollY > limit);
   };
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
